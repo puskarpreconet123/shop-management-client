@@ -6,47 +6,64 @@ import { useToast } from '../context/ToastContext';
 import './CartPage.css';
 
 // Local helper for quantity input with buffer
+// Uses type="text" + inputMode="decimal" to avoid mobile browser quirks with type="number"
+// Cart is ONLY updated on blur or Enter — never during typing
 function QtyInput({ value, onChange, priceType }) {
   const [localVal, setLocalVal] = useState(value.toString());
+  const [isFocused, setIsFocused] = useState(false);
 
-  // Sync with prop changes (e.g. from +/- buttons)
+  // Sync with prop changes (e.g. from +/- buttons), but NOT while the user is actively typing
   useEffect(() => {
-    setLocalVal(value.toString());
-  }, [value]);
+    if (!isFocused) {
+      setLocalVal(value.toString());
+    }
+  }, [value, isFocused]);
 
+  // Allow the user to type anything — no validation during typing
   const handleChange = (e) => {
-    const val = e.target.value;
-    setLocalVal(val);
-    const num = parseFloat(val);
-    if (!isNaN(num) && num >= 0) {
+    setLocalVal(e.target.value);
+  };
+
+  // Only commit the value when the user leaves the field
+  const commitValue = () => {
+    const num = parseFloat(localVal);
+    if (!isNaN(num) && num > 0) {
       onChange(num);
+      setLocalVal(num.toString());
+    } else {
+      // Invalid or empty — revert to the current cart value
+      setLocalVal(value.toString());
     }
   };
 
+  const handleFocus = (e) => {
+    setIsFocused(true);
+    e.target.select(); // Select all text for easy replacement
+  };
+
   const handleBlur = () => {
-    if (localVal === '' || isNaN(parseFloat(localVal)) || parseFloat(localVal) <= 0) {
-      setLocalVal(value.toString());
-    } else {
-      setLocalVal(parseFloat(localVal).toString());
-    }
+    setIsFocused(false);
+    commitValue();
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      e.target.blur();
+      e.preventDefault();
+      e.target.blur(); // This triggers handleBlur → commitValue → keyboard hides
     }
   };
 
   return (
     <input
-      type="number"
+      type="text"
+      inputMode="decimal"
+      pattern="[0-9]*\.?[0-9]*"
       className="qty-input"
       value={localVal}
       onChange={handleChange}
+      onFocus={handleFocus}
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
-      min="0"
-      step={priceType === 'per_kg' ? '0.1' : '1'}
     />
   );
 }
