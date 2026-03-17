@@ -359,13 +359,19 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
   display: grid; grid-template-columns: 2fr 1fr 1fr;
   font-weight: 700; font-size: 0.8rem; color: #888;
   padding-bottom: 10px; border-bottom: 1px solid #eee;
+  text-transform: uppercase; letter-spacing: 0.5px;
 }
+.bt-header span:nth-child(2), .bt-qty { text-align: center; }
+.bt-header span:nth-child(3), .bt-sub { text-align: right; }
+
 .bt-row {
   display: grid; grid-template-columns: 2fr 1fr 1fr;
   padding: 12px 0; border-bottom: 1px dotted #eee;
-  font-size: 0.95rem;
+  font-size: 0.95rem; align-items: center;
 }
-.bt-sub { text-align: right; font-weight: 600; }
+.bt-name { font-weight: 500; color: #1a2e1a; }
+.bt-qty { color: #666; font-size: 0.85rem; }
+.bt-sub { font-weight: 700; color: #1a2e1a; }
 .bill-total-row {
   display: flex; justify-content: space-between; align-items: center;
   padding: 20px 0; border-top: 2px solid #1a2e1a;

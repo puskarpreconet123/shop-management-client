@@ -1,9 +1,48 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag, Weight, Package, ArrowLeft, Printer, CheckCircle, Receipt } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import './CartPage.css';
+
+// Local helper for quantity input with buffer
+function QtyInput({ value, onChange, priceType }) {
+  const [localVal, setLocalVal] = useState(value.toString());
+
+  // Sync with prop changes (e.g. from +/- buttons)
+  useEffect(() => {
+    setLocalVal(value.toString());
+  }, [value]);
+
+  const handleChange = (e) => {
+    const val = e.target.value;
+    setLocalVal(val);
+    const num = parseFloat(val);
+    if (!isNaN(num) && num >= 0) {
+      onChange(num);
+    }
+  };
+
+  const handleBlur = () => {
+    if (localVal === '' || isNaN(parseFloat(localVal)) || parseFloat(localVal) <= 0) {
+      setLocalVal(value.toString());
+    } else {
+      setLocalVal(parseFloat(localVal).toString());
+    }
+  };
+
+  return (
+    <input
+      type="number"
+      className="qty-input"
+      value={localVal}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      min="0"
+      step={priceType === 'per_kg' ? '0.1' : '1'}
+    />
+  );
+}
 
 export default function CartPage() {
   const { items, updateQuantity, removeFromCart, clearCart, totalAmount, totalItems } = useCart();
@@ -163,17 +202,10 @@ export default function CartPage() {
                       }}>
                         <Minus size={13} />
                       </button>
-                      <input
-                        type="number"
-                        min="0.1"
-                        step={item.priceType === 'per_kg' ? '0.1' : '1'}
+                      <QtyInput
                         value={item.quantity}
-                        onChange={e => {
-                          const val = e.target.value;
-                          const num = parseFloat(val);
-                          if (!isNaN(num) && num > 0) updateQuantity(item._id, num);
-                        }}
-                        className="qty-input"
+                        onChange={val => updateQuantity(item._id, val)}
+                        priceType={item.priceType}
                       />
                       <button className="qty-btn qty-btn-add" onClick={() => {
                         const step = item.priceType === 'per_kg' ? 0.1 : 1;
