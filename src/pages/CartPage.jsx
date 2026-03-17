@@ -31,6 +31,12 @@ function QtyInput({ value, onChange, priceType }) {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.target.blur();
+    }
+  };
+
   return (
     <input
       type="number"
@@ -38,6 +44,7 @@ function QtyInput({ value, onChange, priceType }) {
       value={localVal}
       onChange={handleChange}
       onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
       min="0"
       step={priceType === 'per_kg' ? '0.1' : '1'}
     />
