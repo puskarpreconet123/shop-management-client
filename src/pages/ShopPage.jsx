@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from '../utils/api';
-import { Search, SlidersHorizontal, X } from 'lucide-react';
+import { Search, SlidersHorizontal, X, ShoppingCart } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import './ShopPage.css';
 
@@ -54,7 +54,9 @@ export default function ShopPage() {
           <div className="hero-art">
             <div className="art-circle c1" />
             <div className="art-circle c2" />
-            <span className="art-emoji">🛒</span>
+            <div className="art-icon">
+              <ShoppingCart size={36} strokeWidth={1.5} />
+            </div>
           </div>
         </div>
 
