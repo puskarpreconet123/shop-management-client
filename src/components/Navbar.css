@@ -114,5 +114,22 @@
 
 @media (max-width: 600px) {
   .navbar-links { display: none; }
-  .logo-text { font-size: 1.1rem; }
+  .logo-text { font-size: 0.95rem; }
+  .navbar-inner { gap: 6px; }
+  .admin-pill { padding: 4px 8px; font-size: 0.75rem; }
+}
+
+@media (max-width: 420px) {
+  .navbar { height: 56px; }
+  .logo-icon { width: 26px; height: 26px; border-radius: 8px; }
+  .logo-icon svg { width: 14px; height: 14px; }
+  .logo-text { font-size: 0.85rem; max-width: 90px; }
+  .admin-pill span { display: none; }
+  .admin-pill { padding: 6px; }
+  .cart-btn { width: 34px; height: 34px; }
+  .cart-btn svg { width: 16px; height: 16px; }
+}
+
+@media (max-width: 350px) {
+  .logo-text { display: none; } /* Show only icon on extremely narrow screens */
 }

@@ -97,35 +97,27 @@
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.product-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  gap: 8px;
-}
-
 .product-price {
   display: flex;
-  flex-direction: column;
-  gap: 1px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
 }
 
 .price-amount {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: var(--accent);
 }
 
 .price-unit {
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   color: var(--text3);
   display: flex;
   align-items: center;
@@ -134,12 +126,26 @@
   letter-spacing: 0.5px;
 }
 
+.product-actions {
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.1);
+  margin-top: auto;
+}
+
 .add-btn {
+  width: 100%;
+  justify-content: center;
   transition: var(--transition), transform 0.15s !important;
 }
 
 .add-btn.adding {
-  transform: scale(0.93);
+  transform: scale(0.96);
+}
+
+.product-actions .qty-control {
+  width: 100%;
+  justify-content: space-between;
 }
 
 /* Qty control styles live in index.css */

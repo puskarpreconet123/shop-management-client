@@ -224,7 +224,13 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
   background: var(--surface2);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  overflow: hidden;
+  min-width: 90px;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+@media (max-width: 480px) {
+  .qty-btn { width: 34px; height: 34px; }
+  .qty-value { font-size: 0.85rem; min-width: 28px; }
 }
 
 .qty-btn {

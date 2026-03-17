@@ -68,29 +68,32 @@ export default function ProductCard({ product }) {
           <p className="product-desc">{product.description}</p>
         )}
 
-        <div className="product-footer">
-          <div className="product-price">
-            <span className="price-amount">₹{product.price.toFixed(2)}</span>
-            <span className="price-unit">{unitIcon}{unitLabel}</span>
-          </div>
-
-          {product.inStock ? (
-            qty === 0 ? (
-              <button
-                className={`btn btn-primary btn-sm add-btn ${adding ? 'adding' : ''}`}
-                onClick={handleAdd}
-              >
-                <ShoppingCart size={14} /> Add
-              </button>
-            ) : (
-              <div className="qty-control">
-                <button className="qty-btn"         onClick={handleDecrease}><Minus size={13} /></button>
-                <span   className="qty-value">{qty}</span>
-                <button className="qty-btn qty-btn-add" onClick={handleIncrease}><Plus size={13} /></button>
-              </div>
-            )
-          ) : null}
+        <div className="product-price">
+          <span className="price-amount">₹{product.price.toFixed(2)}</span>
+          <span className="price-unit">{unitIcon}{unitLabel}</span>
         </div>
+      </div>
+
+      {/* Actions */}
+      <div className="product-actions">
+        {product.inStock ? (
+          qty === 0 ? (
+            <button
+              className={`btn btn-primary add-btn ${adding ? 'adding' : ''}`}
+              onClick={handleAdd}
+            >
+              <ShoppingCart size={16} /> Add to Cart
+            </button>
+          ) : (
+            <div className="qty-control">
+              <button className="qty-btn"         onClick={handleDecrease}><Minus size={14} /></button>
+              <span   className="qty-value">{qty}</span>
+              <button className="qty-btn qty-btn-add" onClick={handleIncrease}><Plus size={14} /></button>
+            </div>
+          )
+        ) : (
+          <button className="btn btn-ghost w-full" disabled>Out of Stock</button>
+        )}
       </div>
     </div>
   );
