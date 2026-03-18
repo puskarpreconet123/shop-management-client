@@ -73,7 +73,7 @@ export default function ProductCard({ product }) {
         )}
 
         <div className="product-price">
-          <span className="price-amount">₹{product.price.toFixed(2)}</span>
+          <span className="price-amount">₹{product.price}</span>
           <span className="price-unit">{unitIcon}{unitLabel}</span>
         </div>
       </div>
