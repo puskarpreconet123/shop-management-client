@@ -320,7 +320,7 @@ export default function AdminPage() {
                        <div className="admin-row-price">
                          <span className="price-big">₹{p.price}</span>
                          <span className="price-unit-sm">
-                           {p.priceType === 'per_kg' ? <><Weight size={10} />{t.kg}</> : <><ShoppingBag size={10} />{t.p_pcs}</>}
+                           {p.priceType === 'per_kg' ? <><Weight size={10} />{t.p_kg}</> : <><ShoppingBag size={10} />{t.p_pcs}</>}
                          </span>
                        </div>
                       <div className="admin-row-actions">

@@ -34,7 +34,7 @@ export default function ProductCard({ product }) {
   // imageUrl is now a full Cloudinary URL — use it directly
   const imgSrc = product.imageUrl || null;
 
-  const unitLabel = product.priceType === 'per_kg' ? `/${t.kg}` : `/${t.pcs}`;
+  const unitLabel = product.priceType === 'per_kg' ? t.p_kg : t.p_pcs;
   const unitIcon = product.priceType === 'per_kg'
     ? <Weight size={11} />
     : <Package size={11} />;

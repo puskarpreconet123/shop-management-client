@@ -122,7 +122,7 @@ export default function CartPage() {
                 {billDetails.items.map((item, idx) => (
                   <div key={idx} className="bt-row">
                     <span className="bt-name">{item.name[lang] || item.name.en}</span>
-                    <span className="bt-qty">{item.quantity}{item.priceType === 'per_kg' ? t.kg : ''}</span>
+                    <span className="bt-qty">{item.quantity} {item.priceType === 'per_kg' ? t.kg : t.pcs}</span>
                     <span className="bt-sub">₹{(item.price * item.quantity).toFixed(2)}</span>
                   </div>
                 ))}
@@ -192,7 +192,7 @@ export default function CartPage() {
             {items.map(item => {
               const imgSrc = item.imageUrl || null;
               const unitIcon = item.priceType === 'per_kg' ? <Weight size={11} /> : <Package size={11} />;
-              const unitLabel = item.priceType === 'per_kg' ? '/kg' : '/pcs';
+              const unitLabel = item.priceType === 'per_kg' ? t.p_kg : t.p_pcs;
               const itemTotal = item.price * item.quantity;
 
               return (

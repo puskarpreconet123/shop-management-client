@@ -102,14 +102,34 @@
 .history-item {
   display: flex;
   justify-content: space-between;
-  font-size: 0.8rem;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.75rem;
   color: var(--text3);
+  padding: 2px 0;
+  border-bottom: 1px dotted rgba(90, 122, 90, 0.2);
+}
+
+.history-eq {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  text-align: left;
+}
+
+.history-res {
+  font-weight: 700;
+  color: var(--text2);
+  flex-shrink: 0;
 }
 
 .calc-equation {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text2);
   margin-bottom: 4px;
+  width: 100%;
+  text-align: right;
+  overflow-wrap: break-word;
 }
 
 .calc-current-val {
@@ -117,6 +137,9 @@
   font-weight: 700;
   font-family: var(--font-display);
   color: var(--white);
+  width: 100%;
+  text-align: right;
+  overflow-wrap: break-word;
 }
 
 .calc-grid {
