@@ -15,17 +15,15 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify(items));
   }, [items]);
 
-  const addToCart = (product, quantity = 1) => {
+  const addToCart = (product, quantity = 1, unit = 'kg') => {
     setItems(prev => {
       const existing = prev.find(i => i._id === product._id);
       if (existing) {
         return prev.map(i =>
-          i._id === product._id
-            ? { ...i, quantity: i.quantity + quantity }
-            : i
+          i._id === productId ? { ...i, quantity: i.quantity + quantity } : i
         );
       }
-      return [...prev, { ...product, quantity }];
+      return [...prev, { ...product, quantity, unit }];
     });
   };
 
@@ -35,7 +33,13 @@ export const CartProvider = ({ children }) => {
       return;
     }
     setItems(prev =>
-      prev.map(i => i._id === productId ? { ...i, quantity } : i)
+      prev.map(i => i._id === productId ? { ...i, quantity: parseFloat(quantity.toFixed(3)) } : i)
+    );
+  };
+
+  const updateItemUnit = (productId, unit) => {
+    setItems(prev =>
+      prev.map(i => i._id === productId ? { ...i, unit } : i)
     );
   };
 
@@ -58,7 +62,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider value={{
-      items, addToCart, updateQuantity, removeFromCart,
+      items, addToCart, updateQuantity, updateItemUnit, removeFromCart,
       clearCart, getItemQuantity, totalItems, totalAmount
     }}>
       {children}

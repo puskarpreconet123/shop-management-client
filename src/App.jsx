@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { ToastProvider } from './context/ToastContext';
+import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/Navbar';
 import BottomNav from './components/BottomNav';
+import Calculator from './components/Calculator';
 import ShopPage from './pages/ShopPage';
 import CartPage from './pages/CartPage';
 import LoginPage from './pages/LoginPage';
@@ -20,9 +23,11 @@ function AdminRoute({ children }) {
 }
 
 function AppRoutes() {
+  const [isCalcOpen, setIsCalcOpen] = useState(false);
+
   return (
     <>
-      <Navbar />
+      <Navbar onOpenCalc={() => setIsCalcOpen(true)} />
       <Routes>
         <Route path="/" element={<ShopPage />} />
         <Route path="/cart" element={<CartPage />} />
@@ -32,7 +37,8 @@ function AppRoutes() {
         } />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      <BottomNav />
+      <BottomNav onOpenCalc={() => setIsCalcOpen(true)} />
+      <Calculator isOpen={isCalcOpen} onClose={() => setIsCalcOpen(false)} />
     </>
   );
 }
@@ -41,11 +47,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <CartProvider>
-          <ToastProvider>
-            <AppRoutes />
-          </ToastProvider>
-        </CartProvider>
+        <LanguageProvider>
+          <CartProvider>
+            <ToastProvider>
+              <AppRoutes />
+            </ToastProvider>
+          </CartProvider>
+        </LanguageProvider>
       </AuthProvider>
     </BrowserRouter>
   );

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from '../utils/api';
 import { Search, SlidersHorizontal, X, ShoppingCart } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
+import { useLanguage } from '../context/LanguageContext';
+import translations from '../utils/translations';
 import './ShopPage.css';
 
 export default function ShopPage() {
@@ -11,6 +13,8 @@ export default function ShopPage() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [filterInStock, setFilterInStock] = useState(false);
+  const { lang } = useLanguage();
+  const t = translations[lang];
 
   useEffect(() => {
     Promise.all([
@@ -24,7 +28,8 @@ export default function ShopPage() {
 
   // Filtered products
   const filtered = products.filter(p => {
-    const matchSearch = p.name.toLowerCase().includes(search.toLowerCase());
+    const name = p.name[lang] || p.name.en || '';
+    const matchSearch = name.toLowerCase().includes(search.toLowerCase());
     const matchCat = activeCategory === 'all' || p.category?._id === activeCategory;
     const matchStock = !filterInStock || p.inStock;
     return matchSearch && matchCat && matchStock;
@@ -47,9 +52,9 @@ export default function ShopPage() {
         {/* Hero */}
         <div className="shop-hero">
           <div className="shop-hero-text">
-            <div className="hero-eyebrow">🌿 Fresh & Local</div>
-            <h1 className="hero-title">Shop Fresh<br /><span>Every Day</span></h1>
-            <p className="hero-sub">Quality products at your fingertips</p>
+            <div className="hero-eyebrow">{t.hero_eyebrow}</div>
+            <h1 className="hero-title">{t.hero_title}<br /><span>{t.hero_title_span}</span></h1>
+            <p className="hero-sub">{t.hero_sub}</p>
           </div>
           <div className="hero-art">
             <div className="art-circle c1" />
@@ -66,7 +71,7 @@ export default function ShopPage() {
             <Search size={16} className="search-icon" />
             <input
               className="search-input"
-              placeholder="Search products…"
+              placeholder={t.search_placeholder}
               value={search}
               onChange={e => setSearch(e.target.value)}
             />
@@ -78,7 +83,7 @@ export default function ShopPage() {
             className={`btn btn-sm ${filterInStock ? 'btn-primary' : 'btn-ghost'}`}
             onClick={() => setFilterInStock(v => !v)}
           >
-            <SlidersHorizontal size={14} /> In Stock
+            <SlidersHorizontal size={14} /> {t.in_stock}
           </button>
         </div>
 
@@ -88,7 +93,7 @@ export default function ShopPage() {
             className={`cat-pill ${activeCategory === 'all' ? 'active' : ''}`}
             onClick={() => setActiveCategory('all')}
           >
-            🏪 All
+            🏪 {t.all_cat}
           </button>
           {categories.map(cat => (
             <button
@@ -97,7 +102,7 @@ export default function ShopPage() {
               onClick={() => setActiveCategory(cat._id)}
               style={activeCategory === cat._id ? { '--pill-color': cat.color } : {}}
             >
-              {cat.icon} {cat.name}
+              {cat.icon} {cat.name[lang] || cat.name.en}
             </button>
           ))}
         </div>
@@ -112,8 +117,8 @@ export default function ShopPage() {
         ) : filtered.length === 0 ? (
           <div className="empty-state">
             <div className="empty-state-icon">🔍</div>
-            <h3>No products found</h3>
-            <p>Try a different search or category</p>
+            <h3>{t.no_products}</h3>
+            <p>{t.try_different}</p>
           </div>
         ) : grouped ? (
           // Grouped view by category
@@ -125,10 +130,9 @@ export default function ShopPage() {
                     className="cat-section-badge"
                     style={{ background: category.color + '18', borderColor: category.color + '33' }}
                   >
-                    <span>{category.icon}</span>
-                    <h2 style={{ color: category.color }}>{category.name}</h2>
+                    <h2 style={{ color: category.color }}>{category.name[lang] || category.name.en}</h2>
                   </div>
-                  <span className="cat-count">{prods.length} items</span>
+                  <span className="cat-count">{prods.length} {t.items}</span>
                 </div>
                 <div className="products-grid">
                   {prods.map(p => <ProductCard key={p._id} product={p} />)}
@@ -140,7 +144,7 @@ export default function ShopPage() {
                 <div className="cat-section-header">
                   <div className="cat-section-badge">
                     <span>📦</span>
-                    <h2>Other Products</h2>
+                    <h2>{t.other_products}</h2>
                   </div>
                 </div>
                 <div className="products-grid">

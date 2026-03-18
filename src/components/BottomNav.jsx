@@ -1,10 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, ShoppingCart, LayoutDashboard, Shield } from 'lucide-react';
+import { Home, ShoppingCart, LayoutDashboard, Shield, Calculator as CalcIcon } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import './BottomNav.css';
 
-export default function BottomNav() {
+export default function BottomNav({ onOpenCalc }) {
   const { isAdmin } = useAuth();
   const { totalItems } = useCart();
   const location = useLocation();
@@ -18,6 +18,11 @@ export default function BottomNav() {
         <Home size={20} />
         <span>Shop</span>
       </Link>
+
+      <button className="bnav-item bnav-btn" onClick={onOpenCalc}>
+        <CalcIcon size={20} />
+        <span>Calc</span>
+      </button>
 
       <Link to="/cart" className={`bnav-item ${isActive('/cart') ? 'active' : ''}`}>
         <div className="bnav-cart-icon">
@@ -35,7 +40,7 @@ export default function BottomNav() {
       ) : (
         <Link to="/admin/login" className={`bnav-item ${isActive('/admin/login') ? 'active' : ''}`}>
           <Shield size={20} />
-          <span>Admin</span>
+          <span>Login</span>
         </Link>
       )}
     </nav>

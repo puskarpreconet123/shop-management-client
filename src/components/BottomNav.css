@@ -29,6 +29,13 @@
   text-decoration: none;
 }
 
+.bnav-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .bnav-item:hover { color: var(--text); background: var(--surface); }
 .bnav-item.active { color: var(--accent); }
 
