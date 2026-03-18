@@ -273,7 +273,10 @@
 @media (max-width: 480px) {
   .calculator-modal {
     max-width: none;
-    height: 100vh;
+    height: 100dvh;
     border-radius: 0;
+  }
+  .calc-header {
+    padding-top: calc(16px + env(safe-area-inset-top));
   }
 }
