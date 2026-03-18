@@ -40,6 +40,7 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 img { display: block; max-width: 100%; }
 button { cursor: pointer; font-family: var(--font-body); }
@@ -310,6 +311,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
   padding-top: calc(var(--navbar-h) + 24px);
   padding-bottom: calc(var(--bottom-nav-h) + 24px);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 @media (min-width: 768px) {
   .page { padding-bottom: 40px; }

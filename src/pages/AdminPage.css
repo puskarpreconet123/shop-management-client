@@ -41,7 +41,11 @@
   padding: 4px;
   margin-bottom: 20px;
   width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none; /* Hide scrollbar for cleaner look */
 }
+.admin-tabs::-webkit-scrollbar { display: none; }
 
 .admin-tab {
   display: flex; align-items: center; gap: 7px;
@@ -156,12 +160,20 @@
 
 /* Search bar + qty control styles live in index.css */
 
-/* Responsive */
 @media (max-width: 600px) {
-  .admin-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .admin-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .stat-card { padding: 14px 12px; gap: 10px; }
   .stat-num { font-size: 1.2rem; }
-  .admin-row { flex-wrap: wrap; }
+  .admin-row { flex-wrap: wrap; gap: 10px; }
+  .admin-row-info { width: 100%; order: 1; }
+  .admin-row-price { order: 2; margin-top: 4px; }
+  .admin-row-actions { order: 3; margin-top: 4px; margin-left: auto; }
   .form-row { grid-template-columns: 1fr; }
   .cat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .admin-stats { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: 1fr; }
+  .admin-title { font-size: 1.5rem; }
 }
