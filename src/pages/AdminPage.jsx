@@ -196,11 +196,14 @@ export default function AdminPage() {
 
   // Filtered products
   const filteredProducts = products.filter(p => {
-    const nameEn = p.name.en || '';
-    const nameBn = p.name.bn || '';
-    return nameEn.toLowerCase().includes(search.toLowerCase()) || 
-           nameBn.toLowerCase().includes(search.toLowerCase());
-  });
+  const normalize = (str) => str.toLowerCase().replace(/\s+/g, '');
+
+  const nameEn = normalize(p.name.en || '');
+  const nameBn = normalize(p.name.bn || '');
+  const query = normalize(search);
+
+  return nameEn.includes(query) || nameBn.includes(query);
+});
 
   const stats = {
     total: products.length,

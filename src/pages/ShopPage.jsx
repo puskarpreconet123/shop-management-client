@@ -26,10 +26,15 @@ export default function ShopPage() {
     }).finally(() => setLoading(false));
   }, []);
 
+  const normalize = (str) =>
+  str.toLowerCase().trim().replace(/\s+/g, '');
+  const normalizedSearch = normalize(search);
+  
   // Filtered products
   const filtered = products.filter(p => {
-    const name = p.name[lang] || p.name.en || '';
-    const matchSearch = name.toLowerCase().includes(search.toLowerCase());
+    const nameEn = normalize(p.name?.en);
+    const nameBn = normalize(p.name?.bn);
+    const matchSearch = !normalizedSearch || nameEn.includes(normalizedSearch) || nameBn.includes(normalizedSearch);
     const matchCat = activeCategory === 'all' || p.category?._id === activeCategory;
     const matchStock = !filterInStock || p.inStock;
     return matchSearch && matchCat && matchStock;
