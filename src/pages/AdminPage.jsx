@@ -11,7 +11,7 @@ import ImagePicker from '../components/ImagePicker';
 import './AdminPage.css';
 
 
-const ICONS = ['🍪', '🍜', '🧃', '🍿', '🥛', '🌶️', '🌾', '🥦', '🥩', '🧴', '🍫', '🥚', '🧀', '🥗', '🍱', '🌽', '🫙', '🛒', '📦', '🍔'];
+const ICONS = ['🍪', '🍜', '🧃', '🍿', '🥛', '🌶️', '🌾', '🥦', '🧴', '🍫', '🧀', '🥗', '🍱', '🌽', '🫙', '🛒', '📦', '🛕', '🥢'];
 const COLORS = ['#a8e063', '#f4a261', '#e76f51', '#2a9d8f', '#e9c46a', '#a8dadc', '#52b788', '#e63946', '#ffc857', '#8d6e63', '#457b9d', '#c77dff'];
 
 export default function AdminPage() {
