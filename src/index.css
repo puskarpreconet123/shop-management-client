@@ -229,12 +229,12 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
   transition: var(--transition);
 }
 @media (max-width: 480px) {
-  .qty-btn { width: 34px; height: 34px; }
+  .qty-btn { width: 30px; height: 32px; }
   .qty-value { font-size: 0.85rem; min-width: 28px; }
 }
 
 .qty-btn {
-  width: 32px; height: 32px;
+  width: 28px; height: 32px;
   display: flex; align-items: center; justify-content: center;
   background: transparent;
   border: none;
@@ -245,6 +245,35 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
 .qty-btn:hover { background: var(--surface3); color: var(--text); }
 .qty-btn-add:hover { color: var(--accent); }
 
+.unit-switch {
+  display: flex;
+  background: var(--surface2);
+  padding: 2px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.unit-switch.mb-2 {
+  margin-bottom: 8px;
+}
+
+.unit-toggle {
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+  color: var(--text3);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.unit-toggle.active {
+  background: var(--surface3);
+  color: var(--accent);
+}
+
 .qty-value {
   min-width: 30px;
   text-align: center;
@@ -253,6 +282,17 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height
   font-weight: 700;
   color: var(--text);
 }
+
+.qty-input {
+  flex: 1; min-width: 56px; text-align: center;
+  background: transparent; border: none; 
+  border-left: 1px solid rgba(255,255,255,0.08); 
+  border-right: 1px solid rgba(255,255,255,0.08);
+  color: var(--text); font-size: 0.95rem;
+  font-weight: 700; font-family: var(--font-display);
+  height: 100%; min-height: 32px;
+}
+.qty-input:focus { outline: none; background: rgba(0,0,0,0.2); }
 
 /* ─── Search Bar (shared) ────────────────────────────────────── */
 .search-bar-row {

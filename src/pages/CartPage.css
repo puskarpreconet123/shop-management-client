@@ -78,17 +78,6 @@
   width: 34px; height: 36px;
 }
 
-.qty-input {
-  width: 56px; text-align: center;
-  background: transparent; border: none; border-left: 1px solid var(--border); border-right: 1px solid var(--border);
-  color: var(--text); font-size: 0.875rem;
-  font-weight: 700; font-family: var(--font-display);
-  padding: 7px 4px; height: 36px;
-}
-.qty-input:focus { outline: none; }
-.qty-input::-webkit-inner-spin-button,
-.qty-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-.qty-input[type=number] { -moz-appearance: textfield; }
 
 .qty-control-wrapper {
   display: flex;

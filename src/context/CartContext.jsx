@@ -54,7 +54,12 @@ export const CartProvider = ({ children }) => {
     return item ? item.quantity : 0;
   };
 
-  const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
+  const getItemUnit = (productId) => {
+    const item = items.find(i => i._id === productId);
+    return item ? (item.unit || 'kg') : 'kg';
+  };
+
+  const totalItems = items.length;
 
   const totalAmount = items.reduce((sum, item) => {
     return sum + item.price * item.quantity;
@@ -63,7 +68,7 @@ export const CartProvider = ({ children }) => {
   return (
     <CartContext.Provider value={{
       items, addToCart, updateQuantity, updateItemUnit, removeFromCart,
-      clearCart, getItemQuantity, totalItems, totalAmount
+      clearCart, getItemQuantity, getItemUnit, totalItems, totalAmount
     }}>
       {children}
     </CartContext.Provider>

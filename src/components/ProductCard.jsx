@@ -4,14 +4,16 @@ import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { useLanguage } from '../context/LanguageContext';
 import translations from '../utils/translations';
+import QtyInput from './QtyInput';
 import './ProductCard.css';
 
 export default function ProductCard({ product, layout = 'grid' }) {
-  const { addToCart, updateQuantity, getItemQuantity, removeFromCart } = useCart();
+  const { addToCart, updateQuantity, getItemQuantity, removeFromCart, getItemUnit, updateItemUnit } = useCart();
   const toast = useToast();
   const { lang } = useLanguage();
   const t = translations[lang];
   const qty = getItemQuantity(product._id);
+  const unit = getItemUnit(product._id);
   const [adding, setAdding] = useState(false);
 
   const handleAdd = () => {
@@ -90,10 +92,33 @@ export default function ProductCard({ product, layout = 'grid' }) {
               <ShoppingCart size={16} /> {t.add_to_cart}
             </button>
           ) : (
-            <div className="qty-control">
-              <button className="qty-btn" onClick={handleDecrease}><Minus size={14} /></button>
-              <span className="qty-value">{qty}</span>
-              <button className="qty-btn qty-btn-add" onClick={handleIncrease}><Plus size={14} /></button>
+            <div className="flex flex-col items-center w-full">
+              {product.priceType === 'per_kg' && (
+                <div className="unit-switch mb-2">
+                  <button 
+                    className={`unit-toggle ${unit === 'gm' ? '' : 'active'}`}
+                    onClick={() => updateItemUnit(product._id, 'kg')}
+                  >
+                    {t.kg}
+                  </button>
+                  <button 
+                    className={`unit-toggle ${unit === 'gm' ? 'active' : ''}`}
+                    onClick={() => updateItemUnit(product._id, 'gm')}
+                  >
+                    {t.gm}
+                  </button>
+                </div>
+              )}
+              <div className="qty-control w-full">
+                <button className="qty-btn" onClick={handleDecrease}><Minus size={14} /></button>
+                <QtyInput
+                  value={qty}
+                  onChange={(val) => updateQuantity(product._id, val)}
+                  priceType={product.priceType}
+                  unit={unit}
+                />
+                <button className="qty-btn qty-btn-add" onClick={handleIncrease}><Plus size={14} /></button>
+              </div>
             </div>
           )
         ) : (
