@@ -178,6 +178,12 @@
   flex: 0 0 200px;
 }
 
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .cat-section-header {
   display: flex;
   align-items: center;

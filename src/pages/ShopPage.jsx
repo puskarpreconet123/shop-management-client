@@ -164,8 +164,8 @@ export default function ShopPage() {
             )}
           </div>
         ) : (
-          <div className="products-grid fade-in">
-            {filtered.map(p => <ProductCard key={p._id} product={p} />)}
+          <div className="products-list fade-in">
+            {filtered.map(p => <ProductCard key={p._id} product={p} layout="list" />)}
           </div>
         )}
       </div>

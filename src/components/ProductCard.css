@@ -158,3 +158,42 @@
 }
 
 /* Qty control styles live in index.css */
+
+.product-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ─── List Layout ──────────────────────────────────────────── */
+.product-card.list-layout {
+  flex-direction: row;
+}
+
+.product-card.list-layout .product-img-wrap {
+  width: 130px;
+  aspect-ratio: 1;
+  border-right: 1px solid var(--border);
+}
+
+.product-card.list-layout .product-info {
+  padding: 12px 14px 4px 14px;
+}
+
+.product-card.list-layout .product-actions {
+  padding: 4px 14px 12px 14px;
+  border-top: none;
+  background: transparent;
+}
+
+@media (max-width: 480px) {
+  .product-card.list-layout .product-img-wrap {
+    width: 110px;
+  }
+  .product-card.list-layout .product-info {
+    padding: 10px 12px 2px 12px;
+  }
+  .product-card.list-layout .product-actions {
+    padding: 2px 12px 10px 12px;
+  }
+}

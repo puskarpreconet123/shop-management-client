@@ -6,7 +6,7 @@ import { useLanguage } from '../context/LanguageContext';
 import translations from '../utils/translations';
 import './ProductCard.css';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, layout = 'grid' }) {
   const { addToCart, updateQuantity, getItemQuantity, removeFromCart } = useCart();
   const toast = useToast();
   const { lang } = useLanguage();
@@ -40,7 +40,7 @@ export default function ProductCard({ product }) {
     : <Package size={11} />;
 
   return (
-    <div className={`product-card ${!product.inStock ? 'out-of-stock' : ''}`}>
+    <div className={`product-card ${!product.inStock ? 'out-of-stock' : ''} ${layout === 'list' ? 'list-layout' : ''}`}>
       {/* Image */}
       <div className="product-img-wrap">
         {imgSrc ? (
@@ -65,7 +65,8 @@ export default function ProductCard({ product }) {
         )}
       </div>
 
-      {/* Info */}
+      <div className="product-content">
+        {/* Info */}
       <div className="product-info">
         <h3 className="product-name">{product.name[lang] || product.name.en}</h3>
         {product.description && (
@@ -98,6 +99,7 @@ export default function ProductCard({ product }) {
         ) : (
           <button className="btn btn-ghost w-full" disabled>{t.out_of_stock}</button>
         )}
+      </div>
       </div>
     </div>
   );
