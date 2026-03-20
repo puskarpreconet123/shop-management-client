@@ -165,13 +165,13 @@ export default function CartPage() {
                     <div className="qty-control-wrapper">
                       {item.priceType === 'per_kg' && (
                         <div className="cart-item-unit-switch">
-                          <button 
+                          <button
                             className={`unit-toggle ${item.unit === 'gm' ? '' : 'active'}`}
                             onClick={() => updateItemUnit(item._id, 'kg')}
                           >
                             {t.kg}
                           </button>
-                          <button 
+                          <button
                             className={`unit-toggle ${item.unit === 'gm' ? 'active' : ''}`}
                             onClick={() => updateItemUnit(item._id, 'gm')}
                           >
