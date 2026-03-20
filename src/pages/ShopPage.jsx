@@ -137,9 +137,14 @@ export default function ShopPage() {
                   >
                     <h2 style={{ color: category.color }}>{category.name[lang] || category.name.en}</h2>
                   </div>
-                  <span className="cat-count">{prods.length} {t.items}</span>
+                  <div className="cat-section-actions">
+                    <span className="cat-count">{prods.length} {t.items}</span>
+                    <button className="btn btn-sm btn-ghost view-all-btn" onClick={() => setActiveCategory(category._id)}>
+                      {t.view_all}
+                    </button>
+                  </div>
                 </div>
-                <div className="products-grid">
+                <div className="products-row">
                   {prods.map(p => <ProductCard key={p._id} product={p} />)}
                 </div>
               </section>
@@ -152,7 +157,7 @@ export default function ShopPage() {
                     <h2>{t.other_products}</h2>
                   </div>
                 </div>
-                <div className="products-grid">
+                <div className="products-row">
                   {uncategorized.map(p => <ProductCard key={p._id} product={p} />)}
                 </div>
               </section>

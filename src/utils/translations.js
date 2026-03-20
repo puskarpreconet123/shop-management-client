@@ -102,6 +102,7 @@ const translations = {
 
     // General
     add_to_cart: 'Add to Cart',
+    view_all: 'View All',
     out_of_stock: 'Out of Stock',
     kg: 'KG',
     gm: 'GM',
@@ -217,6 +218,7 @@ const translations = {
 
     // General
     add_to_cart: 'কার্টে যোগ করুন',
+    view_all: 'সব দেখুন',
     out_of_stock: 'স্টক নেই',
     kg: 'কেজি',
     gm: 'গ্রাম',
